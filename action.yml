@@ -7,13 +7,13 @@ jobs:
     steps:
     - name: 🚚 Get latest code
       uses: actions/checkout@v3
-    - name: install dependencies
+    - name: 🧩 install dependencies
       run: npm install
-    - name: gernerate static website
+    - name: 🧳 gernerate static website
       run: npm run generate
     - name: 📂 navigate to generated directory
       run: cd .output/public
-    - name: 📂 Sync files FTP
+    - name: 📂🌏 Sync files FTP
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4
       with:
         server: ftp.yourwebsite.com
