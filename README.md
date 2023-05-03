@@ -1,5 +1,5 @@
 # nuxt-to-static-host
-## Github action for deploy Nuxt.js app on static host 
+## Github action for deploying Nuxt.js app on static host using FTP
 This action uses Nuxt static website generation to generate a static website (note that this is not possible with server-side rendering apps)
 
  - Tested on Nuxt 3
