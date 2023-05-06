@@ -1,21 +1,35 @@
-on: push
-name: 🚀 Deploy Nuxt static website on static host
+on:
+  push:
+    branches:
+    - main
+name: upload build version artifact website on push
 jobs:
-  web-deploy:
-    name: 🎉 Deploy
+  build-upload-artifact:
     runs-on: ubuntu-latest
     steps:
-    - name: 🚚 Get latest code
-      uses: actions/checkout@v3
-    - name: 🧩 install dependencies
-      run: npm install
-    - name: 🧳 gernerate static website
-      run: npm run generate
-    - name: 📂 navigate to generated directory
-      run: cd .output/public
-    - name: 📂🌏 Sync files FTP
-      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+     - uses: actions/checkout@v3
+     - run: npm install
+     - run: npm run generate
+     - run: mkdir -p path/to/artifact
+     - run: cd .output/public    
+     - uses: actions/upload-artifact@v3
+       with:
+        name: my-build-artifact
+        path: ./.output/public
+        
+  build-download-artifact:
+    runs-on: ubuntu-latest
+    needs: build-upload-artifact
+    steps:
+    - uses: actions/checkout@v3  
+    - uses: actions/download-artifact@v3
       with:
-        server: ftp.yourwebsite.com
-        username: ${{ secrets.ftp_username }}
+       name: my-build-artifact    
+    - name: Display structure of downloaded files
+      run: ls -R
+    - name: 📂 Sync files FTP
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.4     
+      with:
+        server: ftp.babakzy.com
+        username: gitftpuser@babakzy.com
         password: ${{ secrets.ftp_password }}
