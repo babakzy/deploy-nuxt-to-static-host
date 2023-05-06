@@ -30,6 +30,6 @@ jobs:
     - name: 📂 Sync files FTP
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4     
       with:
-        server: ftp.babakzy.com
-        username: gitftpuser@babakzy.com
+        server: yourdomain.com
+        username: ftpuser@yourdomain.com
         password: ${{ secrets.ftp_password }}
